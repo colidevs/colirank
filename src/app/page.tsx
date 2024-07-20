@@ -1,5 +1,9 @@
-import {Button} from "@/components/ui/button";
+import {Label} from "@/components/ui/label";
 
 export default function HomePage() {
-  return <Button>👋</Button>;
+  return (
+    <Label className="text-2xl" htmlFor="emoji">
+      🍕
+    </Label>
+  );
 }
