@@ -5,6 +5,7 @@ export default function HomePage() {
     <section className="text-center">
       <Button>Boton 1</Button>
       <Button>Boton 2</Button>
+      <Button>Boton 3</Button>
     </section>
   );
 }
