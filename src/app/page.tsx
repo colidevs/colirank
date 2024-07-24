@@ -1,11 +1,9 @@
-import {Label} from "@/components/ui/label";
+import {Button} from "@/components/ui/button";
 
 export default function HomePage() {
   return (
     <section className="text-center">
-      <Label className="text-5xl" htmlFor="emoji">
-        🍕
-      </Label>
+      <Button>Boton 1</Button>
     </section>
   );
 }
