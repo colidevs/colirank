@@ -9,79 +9,62 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const invoices = [
+const usuarios = [
   {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
+    Nombre: "Guille",
+    ID: "us0001",
+    Puntos: "100",
   },
   {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
+    Nombre: "Ezequiel",
+    ID: "us0002",
+    Puntos: "50",
   },
   {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
+    Nombre: "Marcos",
+    ID: "us0003",
+    Puntos: "90",
   },
   {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
+    Nombre: "Guadalupe",
+    ID: "us0004",
+    Puntos: "40",
   },
   {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
+    Nombre: "Lucas",
+    ID: "us0005",
+    Puntos: "20",
   },
   {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
+    Nombre: "Thomas",
+    ID: "us0006",
+    Puntos: "10",
   },
   {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
+    Nombre: "Astrid",
+    ID: "us007",
+    Puntos: "85",
   },
 ];
 
 export default function TableDemo() {
   return (
-    <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
+    <Table className="max-w-75">
+      <TableCaption>Ranking</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Invoice</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
+          <TableHead className="text-left">Nombre</TableHead>
+          <TableHead className="text-right">Puntos</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+        {usuarios.map((usuario) => (
+          <TableRow key={usuario.ID}>
+            <TableCell className="text-left font-medium">{usuario.Nombre}</TableCell>
+            <TableCell className="text-right">{usuario.Puntos}</TableCell>
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter>
     </Table>
   );
 }
