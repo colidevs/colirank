@@ -51,7 +51,7 @@ usuarios.sort((a, b) => b.Puntos - a.Puntos);
 
 export default function TableDemo() {
   return (
-    <Table className="max-w-75">
+    <Table>
       <TableCaption>Ranking</TableCaption>
       <TableHeader>
         <TableRow>
