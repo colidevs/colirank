@@ -47,8 +47,6 @@ const usuarios = [
   },
 ];
 
-usuarios.sort((a, b) => b.Puntos - a.Puntos);
-
 export default function TableDemo() {
   return (
     <Table>
@@ -60,12 +58,14 @@ export default function TableDemo() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {usuarios.map((usuario) => (
-          <TableRow key={usuario.ID}>
-            <TableCell className="text-left font-medium">{usuario.Nombre}</TableCell>
-            <TableCell className="text-right">{usuario.Puntos}</TableCell>
-          </TableRow>
-        ))}
+        {usuarios
+          .sort((a, b) => b.Puntos - a.Puntos)
+          .map(({ID, Nombre, Puntos}) => (
+            <TableRow key={ID}>
+              <TableCell className="text-left font-medium">{Nombre}</TableCell>
+              <TableCell className="text-right">{Puntos}</TableCell>
+            </TableRow>
+          ))}
       </TableBody>
     </Table>
   );
