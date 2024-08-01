@@ -22,19 +22,70 @@ export default function HomePage() {
   );
 }
 
+interface ScoreBtn {
+  name: string;
+  points: number | null;
+  style: string;
+}
+
+const buttons: ScoreBtn[] = [
+  {
+    name: "+50",
+    points: 50,
+    style: "bg-blue-400 p-8",
+  },
+  {
+    name: "+Random",
+    points: null,
+    style: "bg-purple-400 p-8",
+  },
+  {
+    name: "-50",
+    points: -50,
+    style: "bg-green-400 p-8",
+  },
+  {
+    name: "+10",
+    points: 10,
+    style: "bg-orange-400 p-8",
+  },
+  {
+    name: "-Random",
+    points: null,
+    style: "bg-teal-600 p-8",
+  },
+  {
+    name: "-10",
+    points: -10,
+    style: "bg-pink-500 p-8",
+  },
+];
+
 function HomePageClient() {
-  const {users, sumarPuntos} = useContext(UsersContext);
+  const {users, modificarPuntos} = useContext(UsersContext);
+
+  function modificar(button: ScoreBtn) {
+    if (button.points === null) {
+      let random = obtenerNumeroRandom();
+
+      if (button.name === "-Random") {
+        random = -random;
+      }
+      modificarPuntos(users[0], random);
+    } else {
+      modificarPuntos(users[0], button.points);
+    }
+  }
 
   return (
     <section className="flex flex-row space-x-96">
-      <div className="w-4/12">
-        {/* <TableDemo usuarios={usuarios} /> */}
+      <div className="w-5/12">
         <Table>
           <TableCaption>Ranking</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-left">name</TableHead>
-              <TableHead className="text-right">points</TableHead>
+              <TableHead className="text-left">Name</TableHead>
+              <TableHead className="text-right">Score</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -49,37 +100,25 @@ function HomePageClient() {
           </TableBody>
         </Table>
       </div>
-      <div className="m-auto w-6/12 space-x-16 text-center">
-        <Button className="bg-blue-400 p-10" onClick={() => sumarPuntos(users.at(0)!, 50)}>
-          Sumar
-        </Button>
-        <Button className="bg-zinc-200 p-10">Random</Button>
-        <Button className="bg-green-400 p-10">Restar</Button>
+      <div className="m-auto grid w-6/12 grid-cols-3 gap-5 text-center">
+        {buttons.map((btn) => (
+          <Button key={btn.name} className={btn.style} onClick={() => modificar(btn)}>
+            {btn.name}
+          </Button>
+        ))}
       </div>
     </section>
   );
 }
 
-// function TableDemo({usuarios}: {usuarios: User[]}) {
-//   return (
-//     <Table>
-//       <TableCaption>Ranking</TableCaption>
-//       <TableHeader>
-//         <TableRow>
-//           <TableHead className="text-left">name</TableHead>
-//           <TableHead className="text-right">points</TableHead>
-//         </TableRow>
-//       </TableHeader>
-//       <TableBody>
-//         {usuarios
-//           .sort((a, b) => b.points - a.points)
-//           .map(({id, name, points}) => (
-//             <TableRow key={id}>
-//               <TableCell className="text-left font-medium">{name}</TableCell>
-//               <TableCell className="text-right">{points}</TableCell>
-//             </TableRow>
-//           ))}
-//       </TableBody>
-//     </Table>
-//   );
-// }
+function obtenerNumeroRandom() {
+  let numeroRandom = Math.random();
+
+  numeroRandom = numeroRandom * 10;
+
+  numeroRandom = Math.floor(numeroRandom);
+
+  numeroRandom = numeroRandom + 1;
+
+  return numeroRandom;
+}
