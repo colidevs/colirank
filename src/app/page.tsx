@@ -3,6 +3,7 @@ import {useContext} from "react";
 
 import {UsersContext, UserProviderClient} from "@/usersContext";
 import {Button} from "@/components/ui/button";
+import {Checkbox} from "@/components/ui/checkbox";
 import {
   Table,
   TableBody,
@@ -32,32 +33,32 @@ const buttons: ScoreBtn[] = [
   {
     name: "+50",
     points: 50,
-    style: "bg-blue-400 p-8",
+    style: "bg-blue-400 p-8 transition-transform ease-in-out hover:scale-110",
   },
   {
     name: "+Random",
     points: null,
-    style: "bg-purple-400 p-8",
+    style: "bg-purple-400 p-8 transition-transform ease-in-out hover:scale-110",
   },
   {
     name: "-50",
     points: -50,
-    style: "bg-green-400 p-8",
+    style: "bg-green-400 p-8 transition-transform ease-in-out hover:scale-110",
   },
   {
     name: "+10",
     points: 10,
-    style: "bg-orange-400 p-8",
+    style: "bg-orange-400 p-8 transition-transform ease-in-out hover:scale-110",
   },
   {
     name: "-Random",
     points: null,
-    style: "bg-teal-600 p-8",
+    style: "bg-teal-600 p-8 transition-transform ease-in-out hover:scale-110",
   },
   {
     name: "-10",
     points: -10,
-    style: "bg-pink-500 p-8",
+    style: "bg-pink-500 p-8 transition-transform ease-in-out hover:scale-110",
   },
 ];
 
@@ -84,6 +85,7 @@ function HomePageClient() {
           <TableCaption>Ranking</TableCaption>
           <TableHeader>
             <TableRow>
+              <TableHead className="text-right">Select</TableHead>
               <TableHead className="text-left">Name</TableHead>
               <TableHead className="text-right">Score</TableHead>
             </TableRow>
@@ -93,6 +95,9 @@ function HomePageClient() {
               .sort((a, b) => b.score - a.score)
               .map(({id, name, score}) => (
                 <TableRow key={id}>
+                  <TableCell>
+                    <Checkbox />
+                  </TableCell>
                   <TableCell className="text-left font-medium">{name}</TableCell>
                   <TableCell className="text-right">{score}</TableCell>
                 </TableRow>
