@@ -65,16 +65,18 @@ const buttons: ScoreBtn[] = [
 function HomePageClient() {
   const {users, modificarPuntos} = useContext(UsersContext);
 
-  function modificar(button: ScoreBtn) {
+  function handleModificar(button: ScoreBtn) {
+    const usersChecked = users.filter((user) => user.isChecked === true);
+
     if (button.points === null) {
-      let random = obtenerNumeroRandom();
+      let random = getRandomNumber();
 
       if (button.name === "-Random") {
         random = -random;
       }
-      modificarPuntos(users[0], random);
+      modificarPuntos(usersChecked, random);
     } else {
-      modificarPuntos(users[0], button.points);
+      modificarPuntos(usersChecked, button.points);
     }
   }
 
@@ -85,8 +87,8 @@ function HomePageClient() {
           <TableCaption>Ranking</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-right">Select</TableHead>
-              <TableHead className="text-left">Name</TableHead>
+              <TableHead className="text-left">Select</TableHead>
+              <TableHead>Name</TableHead>
               <TableHead className="text-right">Score</TableHead>
             </TableRow>
           </TableHeader>
@@ -107,7 +109,7 @@ function HomePageClient() {
       </div>
       <div className="m-auto grid w-6/12 grid-cols-3 gap-5 text-center">
         {buttons.map((btn) => (
-          <Button key={btn.name} className={btn.style} onClick={() => modificar(btn)}>
+          <Button key={btn.name} className={btn.style} onClick={() => handleModificar(btn)}>
             {btn.name}
           </Button>
         ))}
@@ -116,14 +118,14 @@ function HomePageClient() {
   );
 }
 
-function obtenerNumeroRandom() {
-  let numeroRandom = Math.random();
+function getRandomNumber() {
+  let randomNumber = Math.random();
 
-  numeroRandom = numeroRandom * 10;
+  randomNumber = randomNumber * 10;
 
-  numeroRandom = Math.floor(numeroRandom);
+  randomNumber = Math.floor(randomNumber);
 
-  numeroRandom = numeroRandom + 1;
+  randomNumber = randomNumber + 1;
 
-  return numeroRandom;
+  return randomNumber;
 }
