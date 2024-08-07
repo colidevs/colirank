@@ -1,10 +1,5 @@
 "use client";
-<<<<<<< Updated upstream
-import {useContext, useState} from "react";
-=======
-
 import {useContext} from "react";
->>>>>>> Stashed changes
 
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {UsersContext, UserProviderClient} from "@/usersContext";
@@ -96,7 +91,6 @@ function HomePageClient() {
   }
 
   return (
-<<<<<<< Updated upstream
     <section className="flex flex-row">
       <div className="w-6/12">
         <ScrollArea className="h-[550px] w-[600px] rounded-lg border p-4 shadow-2xl ">
@@ -117,7 +111,7 @@ function HomePageClient() {
                     <TableCell>
                       <Checkbox
                         className="hover:scale-110"
-                        onCheckedChange={() => handleChexbox(id)}
+                        onCheckedChange={() => handleCheckbox(id)}
                       />
                     </TableCell>
                     <TableCell className="text-center font-medium">{name}</TableCell>
@@ -127,33 +121,6 @@ function HomePageClient() {
             </TableBody>
           </Table>
         </ScrollArea>
-=======
-    <section className="flex flex-row space-x-96">
-      <div className="w-5/12">
-        <Table>
-          <TableCaption>Ranking</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="text-left">Select</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead className="text-right">Score</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users
-              .sort((a, b) => b.score - a.score)
-              .map(({id, name, score}) => (
-                <TableRow key={id}>
-                  <TableCell>
-                    <Checkbox onCheckedChange={() => handleCheckbox(id)} />
-                  </TableCell>
-                  <TableCell className="text-left font-medium">{name}</TableCell>
-                  <TableCell className="text-right">{score}</TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
->>>>>>> Stashed changes
       </div>
       <div className="m-auto grid w-4/12 grid-cols-3 gap-5 text-center">
         {buttons.map((btn) => (
