@@ -1,7 +1,7 @@
 "use client";
-
 import {useContext, useState} from "react";
 
+import {ScrollArea} from "@/components/ui/scroll-area";
 import {UsersContext, UserProviderClient} from "@/usersContext";
 import {Button} from "@/components/ui/button";
 import {Checkbox} from "@/components/ui/checkbox";
@@ -93,33 +93,38 @@ function HomePageClient() {
   }
 
   return (
-    <section className="flex flex-row space-x-96">
-      <div className="w-5/12">
-        <Table>
-          <TableCaption>Ranking</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="text-left">Select</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead className="text-right">Score</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users
-              .sort((a, b) => b.score - a.score)
-              .map(({id, name, score}) => (
-                <TableRow key={id}>
-                  <TableCell>
-                    <Checkbox onCheckedChange={() => handleChexbox(id)} />
-                  </TableCell>
-                  <TableCell className="text-left font-medium">{name}</TableCell>
-                  <TableCell className="text-right">{score}</TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
+    <section className="flex flex-row">
+      <div className="w-6/12">
+        <ScrollArea className="h-[550px] w-[600px] rounded-lg border p-4 shadow-2xl ">
+          <Table>
+            <TableCaption>Ranking</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="text-left text-sky-400">Select</TableHead>
+                <TableHead className="text-center text-sky-400">Name</TableHead>
+                <TableHead className="text-right text-sky-400">Score</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="rounded-xl">
+              {users
+                .sort((a, b) => b.score - a.score)
+                .map(({id, name, score}) => (
+                  <TableRow key={id} className="bg-gradient-to-br from-slate-800 to-slate-900">
+                    <TableCell>
+                      <Checkbox
+                        className="hover:scale-110"
+                        onCheckedChange={() => handleChexbox(id)}
+                      />
+                    </TableCell>
+                    <TableCell className="text-center font-medium">{name}</TableCell>
+                    <TableCell className="text-right">{score}</TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </ScrollArea>
       </div>
-      <div className="m-auto grid w-6/12 grid-cols-3 gap-5 text-center">
+      <div className="m-auto grid w-4/12 grid-cols-3 gap-5 text-center">
         {buttons.map((btn) => (
           <Button key={btn.name} className={btn.style} onClick={() => handleModificar(btn)}>
             {btn.name}
