@@ -1,5 +1,10 @@
 "use client";
+<<<<<<< Updated upstream
 import {useContext, useState} from "react";
+=======
+
+import {useContext} from "react";
+>>>>>>> Stashed changes
 
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {UsersContext, UserProviderClient} from "@/usersContext";
@@ -10,7 +15,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -64,20 +68,19 @@ const buttons: ScoreBtn[] = [
 ];
 
 function HomePageClient() {
-  const {users, modificarPuntos, modificarIsChecked} = useContext(UsersContext);
+  const {users, changeScore, changeIsChecked} = useContext(UsersContext);
 
-  const handleChexbox = (id: string) => {
-    const usersActualizados = [...users];
-    const index = usersActualizados.findIndex((x) => x.id === id);
+  const handleCheckbox = (id: string) => {
+    const updatedUsers = [...users];
+    const index = updatedUsers.findIndex((x) => x.id === id);
 
     if (index !== -1) {
-      usersActualizados[index].isChecked = !usersActualizados[index].isChecked;
-      modificarIsChecked(usersActualizados);
-      console.log(usersActualizados);
+      updatedUsers[index].isChecked = !updatedUsers[index].isChecked;
+      changeIsChecked(updatedUsers);
     }
   };
 
-  function handleModificar(button: ScoreBtn) {
+  function handleChangeScore(button: ScoreBtn) {
     const usersChecked = users.filter((user) => user.isChecked === true);
 
     if (button.points === null) {
@@ -86,13 +89,14 @@ function HomePageClient() {
       if (button.name === "-Random") {
         random = -random;
       }
-      modificarPuntos(usersChecked, random);
+      changeScore(usersChecked, random);
     } else {
-      modificarPuntos(usersChecked, button.points);
+      changeScore(usersChecked, button.points);
     }
   }
 
   return (
+<<<<<<< Updated upstream
     <section className="flex flex-row">
       <div className="w-6/12">
         <ScrollArea className="h-[550px] w-[600px] rounded-lg border p-4 shadow-2xl ">
@@ -123,10 +127,37 @@ function HomePageClient() {
             </TableBody>
           </Table>
         </ScrollArea>
+=======
+    <section className="flex flex-row space-x-96">
+      <div className="w-5/12">
+        <Table>
+          <TableCaption>Ranking</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-left">Select</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead className="text-right">Score</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {users
+              .sort((a, b) => b.score - a.score)
+              .map(({id, name, score}) => (
+                <TableRow key={id}>
+                  <TableCell>
+                    <Checkbox onCheckedChange={() => handleCheckbox(id)} />
+                  </TableCell>
+                  <TableCell className="text-left font-medium">{name}</TableCell>
+                  <TableCell className="text-right">{score}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+>>>>>>> Stashed changes
       </div>
       <div className="m-auto grid w-4/12 grid-cols-3 gap-5 text-center">
         {buttons.map((btn) => (
-          <Button key={btn.name} className={btn.style} onClick={() => handleModificar(btn)}>
+          <Button key={btn.name} className={btn.style} onClick={() => handleChangeScore(btn)}>
             {btn.name}
           </Button>
         ))}
