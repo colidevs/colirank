@@ -12,6 +12,7 @@ export interface User {
 interface Context {
   users: User[];
   modificarPuntos: (usersChecked: User[], score: number) => void;
+  modificarIsChecked: (newUsers: User[]) => void;
 }
 
 export const UsersContext = createContext({} as Context);
@@ -19,37 +20,37 @@ export const UsersContext = createContext({} as Context);
 export function UserProviderClient({children}: {children: React.ReactNode}) {
   const initialUsers: User[] = [
     {
-      id: "us0001",
+      id: "us001",
       name: "Guille",
       score: 30,
-      isChecked: true,
+      isChecked: false,
     },
     {
-      id: "us0002",
+      id: "us002",
       name: "Ezequiel",
       score: 50,
-      isChecked: true,
+      isChecked: false,
     },
     {
-      id: "us0003",
+      id: "us003",
       name: "Marcos",
       score: 90,
       isChecked: false,
     },
     {
-      id: "us0004",
+      id: "us004",
       name: "Guadalupe",
       score: 20,
       isChecked: false,
     },
     {
-      id: "us0005",
+      id: "us005",
       name: "Lucas",
       score: 40,
       isChecked: false,
     },
     {
-      id: "us0006",
+      id: "us006",
       name: "Thomas",
       score: 75,
       isChecked: false,
@@ -79,22 +80,21 @@ export function UserProviderClient({children}: {children: React.ReactNode}) {
       console.log(newUsers);
 
       return newUsers;
-      /*  const myUser = users.find((x) => x === user);
-
-    setUsers((users) => {
-      const newUsers = users.with(users.indexOf(user), {
-        id: myUser!.id,
-        name: myUser!.name,
-        score: myUser!.score + score,
-      });
-
-      return newUsers;
-    });*/
     });
   };
 
+  const modificarIsChecked = (newUsers: User[]) => {
+    setUsers((users) => newUsers);
+  };
+
   return (
-    <UsersContext.Provider value={{users: users, modificarPuntos: modificarPuntos}}>
+    <UsersContext.Provider
+      value={{
+        users: users,
+        modificarPuntos: modificarPuntos,
+        modificarIsChecked: modificarIsChecked,
+      }}
+    >
       {children}
     </UsersContext.Provider>
   );

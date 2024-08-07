@@ -1,5 +1,6 @@
 "use client";
-import {useContext} from "react";
+
+import {useContext, useState} from "react";
 
 import {UsersContext, UserProviderClient} from "@/usersContext";
 import {Button} from "@/components/ui/button";
@@ -63,7 +64,18 @@ const buttons: ScoreBtn[] = [
 ];
 
 function HomePageClient() {
-  const {users, modificarPuntos} = useContext(UsersContext);
+  const {users, modificarPuntos, modificarIsChecked} = useContext(UsersContext);
+
+  const handleChexbox = (id: string) => {
+    const usersActualizados = [...users];
+    const index = usersActualizados.findIndex((x) => x.id === id);
+
+    if (index !== -1) {
+      usersActualizados[index].isChecked = !usersActualizados[index].isChecked;
+      modificarIsChecked(usersActualizados);
+      console.log(usersActualizados);
+    }
+  };
 
   function handleModificar(button: ScoreBtn) {
     const usersChecked = users.filter((user) => user.isChecked === true);
@@ -98,7 +110,7 @@ function HomePageClient() {
               .map(({id, name, score}) => (
                 <TableRow key={id}>
                   <TableCell>
-                    <Checkbox />
+                    <Checkbox onCheckedChange={() => handleChexbox(id)} />
                   </TableCell>
                   <TableCell className="text-left font-medium">{name}</TableCell>
                   <TableCell className="text-right">{score}</TableCell>
