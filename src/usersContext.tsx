@@ -11,8 +11,8 @@ export interface User {
 
 interface Context {
   users: User[];
-  modificarPuntos: (usersChecked: User[], score: number) => void;
-  modificarIsChecked: (newUsers: User[]) => void;
+  changeScore: (usersChecked: User[], score: number) => void;
+  changeIsChecked: (newUsers: User[]) => void;
 }
 
 export const UsersContext = createContext({} as Context);
@@ -101,7 +101,7 @@ export function UserProviderClient({children}: {children: React.ReactNode}) {
 
   const [users, setUsers] = useState<User[]>(initialUsers);
 
-  const modificarPuntos = (usersChecked: User[], score: number) => {
+  const changeScore = (usersChecked: User[], score: number) => {
     setUsers((users) => {
       usersChecked.map((x) => {
         users = users.with(users.indexOf(x), {
@@ -113,22 +113,20 @@ export function UserProviderClient({children}: {children: React.ReactNode}) {
       });
       const newUsers = users;
 
-      console.log(newUsers);
-
       return newUsers;
     });
   };
 
-  const modificarIsChecked = (newUsers: User[]) => {
-    setUsers((users) => newUsers);
+  const changeIsChecked = (newUsers: User[]) => {
+    setUsers(() => newUsers);
   };
 
   return (
     <UsersContext.Provider
       value={{
         users: users,
-        modificarPuntos: modificarPuntos,
-        modificarIsChecked: modificarIsChecked,
+        changeScore: changeScore,
+        changeIsChecked: changeIsChecked,
       }}
     >
       {children}
