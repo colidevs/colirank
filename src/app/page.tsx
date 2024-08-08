@@ -1,5 +1,6 @@
 "use client";
 import {useContext} from "react";
+import {Users} from "lucide-react";
 
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {UsersContext, UserProviderClient} from "@/usersContext";
@@ -34,37 +35,37 @@ const buttons: ScoreBtn[] = [
     name: "TIPAZO",
     points: 50,
     style:
-      "bg-blue-800 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
+      "bg-blue-800 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
   },
   {
     name: "HAY ALGO",
     points: null,
     style:
-      "bg-purple-800 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
+      "bg-purple-800 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
   },
   {
     name: "POR FALOPA",
     points: -50,
     style:
-      " bg-red-800 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
+      " bg-red-800 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
   },
   {
     name: "BUEN INTENTO",
     points: 10,
     style:
-      "bg-orange-700 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-lg",
+      "bg-orange-700 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-lg",
   },
   {
     name: "POR BUENA GENTE",
     points: null,
     style:
-      "bg-yellow-700 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-sm",
+      "bg-yellow-700 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-sm",
   },
   {
     name: "POR HIPPIE",
     points: -10,
     style:
-      "bg-pink-800 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
+      "bg-pink-800 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
   },
 ];
 
@@ -96,6 +97,25 @@ function HomePageClient() {
     }
   }
 
+  function setPositionStyle(id: string, align: string) {
+    const index = users.findIndex((x) => x.id === id);
+
+    switch (index) {
+      case 0:
+        return "text-" + align + " font-medium text-xl  text-amber-500";
+        break;
+      case 1:
+        return "text-" + align + " font-medium text-lg  text-amber-500";
+        break;
+      case 2:
+        return "text-" + align + " font-medium  text-amber-500";
+        break;
+      default:
+        return "text-" + align + " font-medium";
+        break;
+    }
+  }
+
   return (
     <section className="flex flex-row">
       <div className="w-6/12">
@@ -120,8 +140,8 @@ function HomePageClient() {
                         onCheckedChange={() => handleCheckbox(id)}
                       />
                     </TableCell>
-                    <TableCell className="text-center font-medium">{name}</TableCell>
-                    <TableCell className="text-right">{score}</TableCell>
+                    <TableCell className={setPositionStyle(id, "center")}>{name}</TableCell>
+                    <TableCell className={setPositionStyle(id, "right")}>{score}</TableCell>
                   </TableRow>
                 ))}
             </TableBody>
