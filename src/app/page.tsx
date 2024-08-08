@@ -33,32 +33,38 @@ const buttons: ScoreBtn[] = [
   {
     name: "TIPAZO",
     points: 50,
-    style: "bg-blue-500 p-8 transition-transform ease-in-out hover:scale-110",
+    style:
+      "bg-blue-800 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
   },
   {
     name: "HAY ALGO",
     points: null,
-    style: "bg-purple-400 p-8 transition-transform ease-in-out hover:scale-110",
+    style:
+      "bg-purple-800 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
   },
   {
     name: "POR FALOPA",
     points: -50,
-    style: "bg-green-400 p-8 transition-transform ease-in-out hover:scale-110",
+    style:
+      " bg-red-800 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
   },
   {
     name: "BUEN INTENTO",
     points: 10,
-    style: "bg-orange-400 p-8 transition-transform ease-in-out hover:scale-110",
+    style:
+      "bg-orange-800 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-lg",
   },
   {
     name: "POR BUENA GENTE",
     points: null,
-    style: "bg-teal-600 p-8 transition-transform ease-in-out hover:scale-110",
+    style:
+      "bg-yellow-700 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-sm",
   },
   {
     name: "POR HIPPIE",
     points: -10,
-    style: "bg-pink-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono",
+    style:
+      "bg-pink-800 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
   },
 ];
 
