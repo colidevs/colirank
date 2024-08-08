@@ -31,34 +31,34 @@ interface ScoreBtn {
 
 const buttons: ScoreBtn[] = [
   {
-    name: "+50",
+    name: "TIPAZO",
     points: 50,
-    style: "bg-blue-400 p-8 transition-transform ease-in-out hover:scale-110",
+    style: "bg-blue-500 p-8 transition-transform ease-in-out hover:scale-110",
   },
   {
-    name: "+Random",
+    name: "HAY ALGO",
     points: null,
     style: "bg-purple-400 p-8 transition-transform ease-in-out hover:scale-110",
   },
   {
-    name: "-50",
+    name: "POR FALOPA",
     points: -50,
     style: "bg-green-400 p-8 transition-transform ease-in-out hover:scale-110",
   },
   {
-    name: "+10",
+    name: "BUEN INTENTO",
     points: 10,
     style: "bg-orange-400 p-8 transition-transform ease-in-out hover:scale-110",
   },
   {
-    name: "-Random",
+    name: "POR BUENA GENTE",
     points: null,
     style: "bg-teal-600 p-8 transition-transform ease-in-out hover:scale-110",
   },
   {
-    name: "-10",
+    name: "POR HIPPIE",
     points: -10,
-    style: "bg-pink-500 p-8 transition-transform ease-in-out hover:scale-110",
+    style: "bg-pink-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono",
   },
 ];
 
