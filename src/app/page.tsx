@@ -52,7 +52,7 @@ const buttons: ScoreBtn[] = [
     name: "BUEN INTENTO",
     points: 10,
     style:
-      "bg-orange-800 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-lg",
+      "bg-orange-700 shadow-lg shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-lg",
   },
   {
     name: "POR BUENA GENTE",
