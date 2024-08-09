@@ -1,20 +1,12 @@
 "use client";
 import {useContext} from "react";
-import {Users} from "lucide-react";
 
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {UsersContext, UserProviderClient} from "@/usersContext";
 import {Button} from "@/components/ui/button";
 import {Checkbox} from "@/components/ui/checkbox";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import {useToast} from "@/components/ui/use-toast";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 
 export default function HomePage() {
   return (
@@ -26,7 +18,7 @@ export default function HomePage() {
 
 interface ScoreBtn {
   name: string;
-  points: number | null;
+  points: number;
   style: string;
 }
 
@@ -39,7 +31,7 @@ const buttons: ScoreBtn[] = [
   },
   {
     name: "HAY ALGO",
-    points: null,
+    points: 0,
     style:
       "bg-emerald-800 hover:bg-emerald-900 shadow-md shadow-lime-300/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl text-white",
   },
@@ -57,7 +49,7 @@ const buttons: ScoreBtn[] = [
   },
   {
     name: "POR BUENA GENTE",
-    points: null,
+    points: 0,
     style:
       "bg-rose-900 hover:bg-rose-950 shadow-md shadow-red-400/50  p-8 transition-transform ease-in-out hover:scale-110 font-mono text-sm text-white",
   },
@@ -71,6 +63,7 @@ const buttons: ScoreBtn[] = [
 
 function HomePageClient() {
   const {users, changeScore, changeIsChecked} = useContext(UsersContext);
+  const {toast} = useToast();
 
   const handleCheckbox = (id: string) => {
     const updatedUsers = [...users];
@@ -85,15 +78,22 @@ function HomePageClient() {
   function handleChangeScore(button: ScoreBtn) {
     const usersChecked = users.filter((user) => user.isChecked === true);
 
-    if (button.points === null) {
-      let random = getRandomNumber();
+    if (usersChecked.length === 0) {
+      toast({title: "No se seleccionó ningún usuario 👊"});
 
-      if (button.name === "-Random") {
-        random = -random;
-      }
-      changeScore(usersChecked, random);
+      return;
+    }
+    if (button.name === "HAY ALGO") {
+      button.points = getRandomNumber();
+    } else if (button.name === "POR BUENA GENTE") {
+      button.points = -getRandomNumber();
+    }
+    changeScore(usersChecked, button.points);
+
+    if (button.points > 0) {
+      toast({title: "Se sumaron " + button.points + " 🎉"});
     } else {
-      changeScore(usersChecked, button.points);
+      toast({variant: "destructive", title: "Se restaron " + button.points + " ☠"});
     }
   }
 
@@ -138,13 +138,12 @@ function HomePageClient() {
   return (
     <section className="flex flex-row">
       <div className="w-6/12">
-        <ScrollArea className="dm h-[550px] w-[600px] rounded-lg border p-4 shadow-2xl ">
+        <ScrollArea className="dm h-[520px] w-[600px] rounded-lg border p-4 shadow-2xl">
           <Table>
-            <TableCaption>Ranking</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="text-left text-sky-400">Select</TableHead>
-                <TableHead className="text-center text-sky-400">Name</TableHead>
+                <TableHead className="text-sky-400">Name</TableHead>
                 <TableHead className="text-right text-sky-400">Score</TableHead>
               </TableRow>
             </TableHeader>
@@ -152,14 +151,14 @@ function HomePageClient() {
               {users
                 .sort((a, b) => b.score - a.score)
                 .map(({id, name, score}) => (
-                  <TableRow key={id} className="bg-gradient-to-br from-slate-800 to-slate-900">
+                  <TableRow key={id}>
                     <TableCell>
                       <Checkbox
                         className="border-white hover:scale-110"
                         onCheckedChange={() => handleCheckbox(id)}
                       />
                     </TableCell>
-                    <TableCell className={setPositionStyle(id, "center")}>
+                    <TableCell className={setPositionStyle(id, "left w-36")}>
                       {setMedal(id, name)}
                     </TableCell>
                     <TableCell className={setPositionStyle(id, "right")}>{score}</TableCell>
