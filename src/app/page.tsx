@@ -59,7 +59,7 @@ const buttons: ScoreBtn[] = [
     name: "POR BUENA GENTE",
     points: null,
     style:
-      "bg-rose-900 hover:bg-orange-900 shadow-md shadow-red-400/50  p-8 transition-transform ease-in-out hover:scale-110 font-mono text-sm text-white",
+      "bg-rose-900 hover:bg-rose-950 shadow-md shadow-red-400/50  p-8 transition-transform ease-in-out hover:scale-110 font-mono text-sm text-white",
   },
   {
     name: "POR HIPPIE",
