@@ -35,37 +35,37 @@ const buttons: ScoreBtn[] = [
     name: "TIPAZO",
     points: 50,
     style:
-      "bg-blue-800 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
+      "bg-green-900 shadow-md shadow-lime-300/50 p-8 transition-transform ease-in-out hover:scale-110 hover:bg-green-950 font-mono text-xl text-white",
   },
   {
     name: "HAY ALGO",
     points: null,
     style:
-      "bg-purple-800 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
+      "bg-emerald-800 hover:bg-emerald-900 shadow-md shadow-lime-300/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl text-white",
   },
   {
     name: "POR FALOPA",
     points: -50,
     style:
-      " bg-red-800 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
+      "bg-red-700 hover:bg-rose-950 shadow-md shadow-red-400/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl text-white",
   },
   {
     name: "BUEN INTENTO",
     points: 10,
     style:
-      "bg-orange-700 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-lg",
+      "bg-green-800 hover:bg-green-900 shadow-md shadow-lime-300/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-lg text-white",
   },
   {
     name: "POR BUENA GENTE",
     points: null,
     style:
-      "bg-yellow-700 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-sm",
+      "bg-rose-900 hover:bg-orange-900 shadow-md shadow-red-400/50  p-8 transition-transform ease-in-out hover:scale-110 font-mono text-sm text-white",
   },
   {
     name: "POR HIPPIE",
     points: -10,
     style:
-      "bg-pink-800 shadow-md shadow-indigo-600/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl",
+      "bg-red-800 hover:bg-red-900 shadow-md shadow-red-400/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl text-white",
   },
 ];
 
@@ -102,16 +102,35 @@ function HomePageClient() {
 
     switch (index) {
       case 0:
-        return "text-" + align + " font-medium text-xl  text-amber-500";
+        return "text-" + align + " font-medium text-xl text-yellow-500";
         break;
       case 1:
-        return "text-" + align + " font-medium text-lg  text-amber-500";
+        return "text-" + align + " font-medium text-lg  text-slate-400";
         break;
       case 2:
-        return "text-" + align + " font-medium  text-amber-500";
+        return "text-" + align + " font-medium  text-orange-600";
         break;
       default:
-        return "text-" + align + " font-medium";
+        return "text-" + align + " font-medium text-white";
+        break;
+    }
+  }
+
+  function setMedal(id: string, name: string) {
+    const index = users.findIndex((x) => x.id === id);
+
+    switch (index) {
+      case 0:
+        return name + " 🥇";
+        break;
+      case 1:
+        return name + " 🥈";
+        break;
+      case 2:
+        return name + " 🥉";
+        break;
+      default:
+        return name;
         break;
     }
   }
@@ -119,7 +138,7 @@ function HomePageClient() {
   return (
     <section className="flex flex-row">
       <div className="w-6/12">
-        <ScrollArea className="h-[550px] w-[600px] rounded-lg border p-4 shadow-2xl ">
+        <ScrollArea className="dm h-[550px] w-[600px] rounded-lg border p-4 shadow-2xl ">
           <Table>
             <TableCaption>Ranking</TableCaption>
             <TableHeader>
@@ -136,11 +155,13 @@ function HomePageClient() {
                   <TableRow key={id} className="bg-gradient-to-br from-slate-800 to-slate-900">
                     <TableCell>
                       <Checkbox
-                        className="hover:scale-110"
+                        className="border-white hover:scale-110"
                         onCheckedChange={() => handleCheckbox(id)}
                       />
                     </TableCell>
-                    <TableCell className={setPositionStyle(id, "center")}>{name}</TableCell>
+                    <TableCell className={setPositionStyle(id, "center")}>
+                      {setMedal(id, name)}
+                    </TableCell>
                     <TableCell className={setPositionStyle(id, "right")}>{score}</TableCell>
                   </TableRow>
                 ))}
