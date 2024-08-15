@@ -62,6 +62,7 @@ const buttons: ScoreBtn[] = [
 ];
 
 function HomePageClient() {
+  const toastDuration: number = 550;
   const {users, changeScore, changeIsChecked} = useContext(UsersContext);
   const {toast} = useToast();
 
@@ -79,7 +80,7 @@ function HomePageClient() {
     const usersChecked = users.filter((user) => user.isChecked === true);
 
     if (usersChecked.length === 0) {
-      toast({title: "No se seleccionó ningún usuario 👊", duration: 550});
+      toast({title: "No se seleccionó ningún usuario 👊", duration: toastDuration});
 
       return;
     }
@@ -91,9 +92,13 @@ function HomePageClient() {
     changeScore(usersChecked, button.points);
 
     if (button.points > 0) {
-      toast({title: "Se sumaron " + button.points + " 🎉", duration: 550});
+      toast({title: "Se sumaron " + button.points + " 🎉", duration: toastDuration});
     } else {
-      toast({variant: "destructive", title: "Se restaron " + button.points + " ☠", duration: 550});
+      toast({
+        variant: "destructive",
+        title: "Se restaron " + button.points + " ☠",
+        duration: toastDuration,
+      });
     }
   }
 
