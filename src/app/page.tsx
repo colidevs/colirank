@@ -17,47 +17,47 @@ export default function HomePage() {
 }
 
 interface ScoreBtn {
-  name: string;
+  content: string;
   points: number;
   style: string;
 }
 
+const commonStyle: string =
+  "bg-zinc-50 drop-shadow-md text-zinc-950 rounded-2xl p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl";
+
+const greenBtn: string = `${commonStyle} hover:bg-emerald-550`;
+const redBtn: string = `${commonStyle} hover:bg-rose-550`;
+
 const buttons: ScoreBtn[] = [
   {
-    name: "🤠",
+    content: "🤠",
     points: 50,
-    style:
-      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-emerald-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
+    style: greenBtn,
   },
   {
-    name: "🕵️",
+    content: "🕵️",
     points: 0,
-    style:
-      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-emerald-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
+    style: greenBtn,
   },
   {
-    name: "👍",
+    content: "👍",
     points: 10,
-    style:
-      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-green-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
+    style: greenBtn,
   },
   {
-    name: "🌚",
+    content: "🌚",
     points: -50,
-    style:
-      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-rose-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
+    style: redBtn,
   },
   {
-    name: "👻",
+    content: "👻",
     points: 0,
-    style:
-      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-rose-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
+    style: redBtn,
   },
   {
-    name: "🦄",
+    content: "🦄",
     points: -10,
-    style:
-      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-rose-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
+    style: redBtn,
   },
 ];
 
@@ -79,21 +79,21 @@ function HomePageClient() {
     const usersChecked = users.filter((user) => user.isChecked === true);
 
     if (usersChecked.length === 0) {
-      toast({title: "No se seleccionó ningún usuario 👊"});
+      toast({title: "No se seleccionó ningún usuario 👊", duration: 550});
 
       return;
     }
-    if (button.name === "HAY ALGO") {
+    if (button.content === "HAY ALGO") {
       button.points = getRandomNumber();
-    } else if (button.name === "POR BUENA GENTE") {
+    } else if (button.content === "POR BUENA GENTE") {
       button.points = -getRandomNumber();
     }
     changeScore(usersChecked, button.points);
 
     if (button.points > 0) {
-      toast({title: "Se sumaron " + button.points + " 🎉"});
+      toast({title: "Se sumaron " + button.points + " 🎉", duration: 550});
     } else {
-      toast({variant: "destructive", title: "Se restaron " + button.points + " ☠"});
+      toast({variant: "destructive", title: "Se restaron " + button.points + " ☠", duration: 550});
     }
   }
 
@@ -102,13 +102,13 @@ function HomePageClient() {
 
     switch (index) {
       case 0:
-        return "text-" + align + " font-medium text-xl text-yellow-500";
+        return "text-" + align + " font-medium text-xl text-yellow-550";
         break;
       case 1:
         return "text-" + align + " font-medium text-lg  text-slate-400";
         break;
       case 2:
-        return "text-" + align + " font-medium  text-orange-600";
+        return "text-" + align + " font-medium  text-orange-550";
         break;
       default:
         return "text-" + align + " font-medium text-zinc-950";
@@ -168,8 +168,8 @@ function HomePageClient() {
       </ScrollArea>
       <div className="flex flex-col justify-around">
         {buttons.map((btn) => (
-          <Button key={btn.name} className={btn.style} onClick={() => handleChangeScore(btn)}>
-            {btn.name}
+          <Button key={btn.content} className={btn.style} onClick={() => handleChangeScore(btn)}>
+            {btn.content}
           </Button>
         ))}
       </div>
