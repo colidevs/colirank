@@ -25,8 +25,8 @@ interface ScoreBtn {
 const commonStyle: string =
   "bg-zinc-50 drop-shadow-md text-zinc-950 rounded-2xl p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl";
 
-const greenBtn: string = `${commonStyle} hover:bg-emerald-550`;
-const redBtn: string = `${commonStyle} hover:bg-rose-550`;
+const greenBtn: string = `${commonStyle} hover:bg-emerald-500 hover:rotate-2`;
+const redBtn: string = `${commonStyle} hover:bg-rose-500 hover:-rotate-2`;
 
 const buttons: ScoreBtn[] = [
   {
