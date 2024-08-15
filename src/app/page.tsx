@@ -36,16 +36,16 @@ const buttons: ScoreBtn[] = [
       "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-emerald-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
   },
   {
-    name: "🌚",
-    points: -50,
-    style:
-      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-rose-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
-  },
-  {
     name: "👍",
     points: 10,
     style:
       "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-green-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
+  },
+  {
+    name: "🌚",
+    points: -50,
+    style:
+      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-rose-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
   },
   {
     name: "👻",
