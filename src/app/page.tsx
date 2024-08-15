@@ -24,40 +24,40 @@ interface ScoreBtn {
 
 const buttons: ScoreBtn[] = [
   {
-    name: "TIPAZO",
+    name: "🤠",
     points: 50,
     style:
-      "bg-green-900 shadow-md shadow-lime-300/50 p-8 transition-transform ease-in-out hover:scale-110 hover:bg-green-950 font-mono text-xl text-white",
+      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-emerald-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
   },
   {
-    name: "HAY ALGO",
+    name: "🕵️",
     points: 0,
     style:
-      "bg-emerald-800 hover:bg-emerald-900 shadow-md shadow-lime-300/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl text-white",
+      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-emerald-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
   },
   {
-    name: "POR FALOPA",
+    name: "🌚",
     points: -50,
     style:
-      "bg-red-700 hover:bg-rose-950 shadow-md shadow-red-400/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl text-white",
+      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-rose-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
   },
   {
-    name: "BUEN INTENTO",
+    name: "👍",
     points: 10,
     style:
-      "bg-green-800 hover:bg-green-900 shadow-md shadow-lime-300/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-lg text-white",
+      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-green-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
   },
   {
-    name: "POR BUENA GENTE",
+    name: "👻",
     points: 0,
     style:
-      "bg-rose-900 hover:bg-rose-950 shadow-md shadow-red-400/50  p-8 transition-transform ease-in-out hover:scale-110 font-mono text-sm text-white",
+      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-rose-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
   },
   {
-    name: "POR HIPPIE",
+    name: "🦄",
     points: -10,
     style:
-      "bg-red-800 hover:bg-red-900 shadow-md shadow-red-400/50 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-xl text-white",
+      "bg-zinc-50 drop-shadow-md  text-zinc-950 rounded-2xl hover:bg-rose-500 p-8 transition-transform ease-in-out hover:scale-110 font-mono text-3xl",
   },
 ];
 
@@ -111,7 +111,7 @@ function HomePageClient() {
         return "text-" + align + " font-medium  text-orange-600";
         break;
       default:
-        return "text-" + align + " font-medium text-white";
+        return "text-" + align + " font-medium text-zinc-950";
         break;
     }
   }
@@ -136,39 +136,37 @@ function HomePageClient() {
   }
 
   return (
-    <section className="flex flex-row">
-      <div className="w-6/12">
-        <ScrollArea className="dm h-[520px] w-[600px] rounded-lg border p-4 shadow-2xl">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="text-left text-sky-400">Select</TableHead>
-                <TableHead className="text-sky-400">Name</TableHead>
-                <TableHead className="text-right text-sky-400">Score</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody className="rounded-xl">
-              {users
-                .sort((a, b) => b.score - a.score)
-                .map(({id, name, score}) => (
-                  <TableRow key={id}>
-                    <TableCell>
-                      <Checkbox
-                        className="border-white hover:scale-110"
-                        onCheckedChange={() => handleCheckbox(id)}
-                      />
-                    </TableCell>
-                    <TableCell className={setPositionStyle(id, "left w-36")}>
-                      {setMedal(id, name)}
-                    </TableCell>
-                    <TableCell className={setPositionStyle(id, "right")}>{score}</TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </ScrollArea>
-      </div>
-      <div className="m-auto grid w-4/12 grid-cols-3 gap-5 text-center">
+    <section className="m-auto flex max-w-4xl flex-col gap-6 lg:flex-row">
+      <ScrollArea className="m-auto flex-1 rounded-lg border border-zinc-300/20 p-4 bg-zinc-50 drop-shadow-md">
+        <Table>
+          <TableHeader>
+            <TableRow className="border-b border-rose-900 hover:bg-transparent">
+              <TableHead className="text-left text-rose-700 text-xl">Select</TableHead>
+              <TableHead className="text-rose-700 text-xl">Name</TableHead>
+              <TableHead className="text-right text-rose-700 text-xl">Score</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {users
+              .sort((a, b) => b.score - a.score)
+              .map(({id, name, score}) => (
+                <TableRow key={id} className="hover:bg-rose-100/50 border-b border-rose-900">
+                  <TableCell>
+                    <Checkbox
+                      className="border-rose-900 dark:border-white hover:scale-110"
+                      onCheckedChange={() => handleCheckbox(id)}
+                    />
+                  </TableCell>
+                  <TableCell className={setPositionStyle(id, "left w-36")}>
+                    {setMedal(id, name)}
+                  </TableCell>
+                  <TableCell className={setPositionStyle(id, "right")}>{score}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </ScrollArea>
+      <div className="flex flex-col justify-around">
         {buttons.map((btn) => (
           <Button key={btn.name} className={btn.style} onClick={() => handleChangeScore(btn)}>
             {btn.name}
