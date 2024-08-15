@@ -137,23 +137,23 @@ function HomePageClient() {
 
   return (
     <section className="m-auto flex max-w-4xl flex-col gap-6 lg:flex-row">
-      <ScrollArea className="m-auto flex-1 rounded-lg border border-zinc-300/20 p-4 bg-zinc-50 drop-shadow-md">
+      <ScrollArea className="m-auto flex-1 rounded-lg border border-zinc-300/20 bg-zinc-50 p-4 drop-shadow-md">
         <Table>
           <TableHeader>
             <TableRow className="border-b border-rose-900 hover:bg-transparent">
-              <TableHead className="text-left text-rose-700 text-xl">Select</TableHead>
-              <TableHead className="text-rose-700 text-xl">Name</TableHead>
-              <TableHead className="text-right text-rose-700 text-xl">Score</TableHead>
+              <TableHead className="text-left text-xl text-rose-700">Select</TableHead>
+              <TableHead className="text-xl text-rose-700">Name</TableHead>
+              <TableHead className="text-right text-xl text-rose-700">Score</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {users
               .sort((a, b) => b.score - a.score)
               .map(({id, name, score}) => (
-                <TableRow key={id} className="hover:bg-rose-100/50 border-b border-rose-900">
+                <TableRow key={id} className="border-b border-rose-900 hover:bg-rose-100/50">
                   <TableCell>
                     <Checkbox
-                      className="border-rose-900 dark:border-white hover:scale-110"
+                      className="border-rose-900 hover:scale-110 dark:border-white"
                       onCheckedChange={() => handleCheckbox(id)}
                     />
                   </TableCell>
