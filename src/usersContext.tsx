@@ -1,116 +1,44 @@
 "use client";
 
 import {createContext, useState} from "react";
+import {type User as UserDTO} from "@prisma/client";
 
-export interface User {
-  id: string;
-  name: string;
-  score: number;
+import {AddScore} from "@/actions";
+
+export interface User extends UserDTO {
   isChecked: boolean;
 }
 
 interface Context {
   users: User[];
+  initialUsers?: UserDTO[];
   changeScore: (usersChecked: User[], score: number) => void;
   changeIsChecked: (newUsers: User[]) => void;
 }
 
 export const UsersContext = createContext({} as Context);
 
-export function UserProviderClient({children}: {children: React.ReactNode}) {
-  const initialUsers: User[] = [
-    {
-      id: "us001",
-      name: "Guille",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us002",
-      name: "Ezequiel",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us003",
-      name: "Marco",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us004",
-      name: "Guada",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us005",
-      name: "Lucas",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us006",
-      name: "Thomas",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us007",
-      name: "Astrid",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us008",
-      name: "Lato",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us009",
-      name: "Fede",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us010",
-      name: "Nico",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us011",
-      name: "Joel",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us012",
-      name: "Fran",
-      score: 0,
-      isChecked: false,
-    },
-    {
-      id: "us013",
-      name: "Facu",
-      score: 0,
-      isChecked: false,
-    },
-  ];
-
-  const [users, setUsers] = useState<User[]>(initialUsers);
+export function UserProviderClient({
+  children,
+  usersFromDb,
+}: {
+  children: React.ReactNode;
+  usersFromDb: UserDTO[];
+}) {
+  const [users, setUsers] = useState<User[]>(usersFromDb as User[]);
 
   const changeScore = (usersChecked: User[], score: number) => {
     setUsers((users) => {
       usersChecked.map((x) => {
         users = users.with(users.indexOf(x), {
-          id: x!.id,
-          name: x!.name,
+          ...x,
           score: x!.score + score,
           isChecked: x!.isChecked,
         });
+
+        AddScore(x.id, x.score + score);
       });
+
       const newUsers = users;
 
       return newUsers;
