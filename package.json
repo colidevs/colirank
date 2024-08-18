@@ -2,9 +2,13 @@
   "name": "colirank",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.16.0",
+    "pnpm": ">=9.1.2"
+  },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm dlx prisma generate && pnpm dlx prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint"
   },
