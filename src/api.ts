@@ -1,6 +1,6 @@
-import {PrismaClient, User} from "@prisma/client";
+import {type User} from "@prisma/client";
 
-const prisma = new PrismaClient();
+import prisma from "@/db";
 
 export const api = {
   list: async (): Promise<User[]> => {
