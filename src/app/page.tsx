@@ -141,7 +141,7 @@ function HomePageClient() {
   }
 
   return (
-    <section className="m-auto flex max-w-4xl flex-col gap-6 lg:flex-row">
+    <section className="m-auto flex max-w-4xl flex-col gap-6 md:flex-row lg:flex-row">
       <ScrollArea className="m-auto flex-1 rounded-lg border border-zinc-300/20 bg-zinc-50 p-4 drop-shadow-md">
         <Table>
           <TableHeader>
@@ -171,7 +171,7 @@ function HomePageClient() {
           </TableBody>
         </Table>
       </ScrollArea>
-      <div className="flex flex-col justify-around">
+      <div className="grid grid-cols-2 justify-around gap-5 md:flex md:flex-col lg:flex lg:flex-col">
         {buttons.map((btn) => (
           <Button key={btn.content} className={btn.style} onClick={() => handleChangeScore(btn)}>
             {btn.content}
