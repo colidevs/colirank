@@ -11,7 +11,6 @@ export interface User extends UserDTO {
 
 interface Context {
   users: User[];
-  initialUsers?: UserDTO[];
   changeScore: (usersChecked: User[], score: number) => void;
   changeIsChecked: (newUsers: User[]) => void;
 }
